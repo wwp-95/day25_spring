@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <!--1. 开启spring ioc的注解方式开发，这一步在当前或者更新的版本可省略  -->
+    <context:annotation-config />
+    <!--2. 开启组件扫描 -->
+    <context:component-scan base-package="cn.qphone.spring.ioc" />
     <!-- 1.通过ioc容器来创建对象 -->
     <!--
    id : 表示这个对象的引用名称
    class : 要创建对象的类型：包名.类名
     -->
-    <bean id = "c1" class="cn.qphone.spring.Chinese" />
+    <bean id = "c1" class="cn.qphone.spring.Chinese" >
+        <constructor-arg name="name" value="张三"/>
+        <constructor-arg name="age" value="18"/>
+        <constructor-arg name="feature" value="嘻嘻"/>
+    </bean>
+    <bean id = "c2" class="cn.qphone.spring.Chinese">
+        <property name="name" value="李四"/>
+        <property name="age" value="19"/>
+        <property name="feature" value="哈哈"/>
+    </bean>
+
+<!--    <bean id = "c2" class="cn.qphone.spring.factory.BeanFactory" />-->
+<!--    <bean id = "c3" factory-bean="c2" factory-method="createChina" />-->
 </beans>
